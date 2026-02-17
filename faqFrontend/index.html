@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный FAQ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>💡 Умный FAQ</h1>
+            <p>База знаний с удобным поиском</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Поиск по вопросам и ответам..."
+                    autocomplete="off"
+                >
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- FAQ List -->
+            <div class="faq-list">
+                <div class="faq-header">
+                    <h2>Вопросы и ответы</h2>
+                    <div class="filter-tabs" id="filterTabs">
+                        <button class="tab active" data-category="">Все</button>
+                        <button class="tab" data-category="general">Общие</button>
+                        <button class="tab" data-category="technical">Технические</button>
+                        <button class="tab" data-category="billing">Оплата</button>
+                        <button class="tab" data-category="support">Поддержка</button>
+                    </div>
+                </div>
+
+                <!-- FAQ Items Container -->
+                <div id="faqContainer">
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Загрузка...</p>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination"></div>
+            </div>
+
+            <!-- Add FAQ Form -->
+            <aside class="add-faq-form">
+                <h3 id="formTitle">➕ Добавить вопрос</h3>
+                
+                <form id="faqForm">
+                    <input type="hidden" id="editId" value="">
+                    
+                    <div class="form-group">
+                        <label for="question">Вопрос *</label>
+                        <input 
+                            type="text" 
+                            id="question" 
+                            placeholder="Введите вопрос..."
+                            required
+                            maxlength="2000"
+                        >
+                        <span class="char-count" id="questionCount">0/2000</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="answer">Ответ *</label>
+                        <textarea 
+                            id="answer" 
+                            placeholder="Введите ответ..."
+                            required
+                            maxlength="2000"
+                        ></textarea>
+                        <span class="char-count" id="answerCount">0/2000</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Категория</label>
+                        <select id="category">
+                            <option value="">Выберите категорию</option>
+                            <option value="general">Общие</option>
+                            <option value="technical">Технические</option>
+                            <option value="billing">Оплата</option>
+                            <option value="support">Поддержка</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        Добавить вопрос
+                    </button>
+                    
+                    <button type="button" class="btn-cancel" id="cancelBtn" style="display: none;">
+                        Отмена
+                    </button>
+                </form>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Modal for Delete Confirmation -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <h3>Подтверждение удаления</h3>
+            <p>Вы уверены, что хотите удалить этот вопрос?</p>
+            <div class="modal-actions">
+                <button class="btn-confirm" id="confirmDelete">Удалить</button>
+                <button class="btn-cancel-modal" id="cancelDelete">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
